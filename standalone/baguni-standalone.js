@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function createBaguni(initState = null) {
+export function createBaguni(initState = null) {
   const prototype = {
     data: { state: initState, reRenderFns: [] },
 
@@ -29,24 +29,22 @@ function createBaguni(initState = null) {
   return Object.freeze(Object.create(prototype));
 }
 
-export function useBaguni(globalState) {
-  const [, set] = useState(globalState.get());
-  const state = globalState.get();
+export function useBaguni(bState) {
+  const [, set] = useState(bState.get());
+  const state = bState.get();
 
   const reRender = () => set({});
 
   useEffect(() => {
-    globalState.joinReRender(reRender);
+    bState.joinReRender(reRender);
     return () => {
-      globalState.cancelReRender(reRender);
+      bState.cancelReRender(reRender);
     };
-  }, [globalState]);
+  }, [bState]);
 
   function setState(newState) {
-    globalState.set(newState);
+    bState.set(newState);
   }
 
   return [state, setState];
 }
-
-export { createBaguni };

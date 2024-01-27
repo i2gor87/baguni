@@ -2,7 +2,7 @@ import { Dispatch, useEffect, useState } from "react";
 
 type ReRenderFn = () => void;
 
-interface GlobalState<T> {
+interface BState<T> {
   data: {
     state: T;
     reRenderFns: ReRenderFn[];
@@ -13,9 +13,7 @@ interface GlobalState<T> {
   set: (newState: T) => void;
 }
 
-function createGlobalState<T>(
-  initState: T = null as unknown as T
-): GlobalState<T> {
+function createBState<T>(initState: T = null as unknown as T): BState<T> {
   const prototype = {
     data: { state: initState, reRenderFns: [] as ReRenderFn[] },
 
@@ -44,27 +42,22 @@ function createGlobalState<T>(
   return Object.freeze(Object.create(prototype));
 }
 
-export function useGlobalState<T>(
-  globalState: GlobalState<T>
-): [T, Dispatch<any>] {
-  const [, set] = useState<T>(globalState.get());
-  const state = globalState.get();
+export function useBState<T>(BState: BState<T>): [T, Dispatch<any>] {
+  const [, set] = useState<T>(BState.get());
+  const state = BState.get();
 
   const reRender = () => set({} as T);
 
   useEffect(() => {
-    globalState.joinReRender(reRender);
+    BState.joinReRender(reRender);
     return () => {
-      globalState.cancelReRender(reRender);
+      BState.cancelReRender(reRender);
     };
-  }, [globalState]);
+  }, [BState]);
 
   function setState(newState: T) {
-    globalState.set(newState);
+    BState.set(newState);
   }
 
   return [state, setState];
 }
-
-export const AUTH_TOKEN = createGlobalState<string>("");
-export const COMPARE_STATE = createGlobalState<number[]>([]);
