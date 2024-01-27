@@ -1,0 +1,32 @@
+{
+  "name": "baguni",
+  "version": "0.0.1",
+  "description": "A lightweight package for state management",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest ./tests"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "testEnvironment": "jest-environment-jsdom"
+  },
+  "keywords": ["state", "management", "react", "typescript"],
+  "author": "Igor Hwang",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "@testing-library/jest-dom": "^6.3.0",
+    "@testing-library/react": "^14.1.2",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react-test-renderer": "^18.2.0"
+  }
+}
