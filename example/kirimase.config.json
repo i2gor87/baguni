@@ -1,0 +1,13 @@
+{
+  "hasSrc": true,
+  "packages": [
+    "shadcn-ui",
+    "trpc"
+  ],
+  "preferredPackageManager": "npm",
+  "t3": false,
+  "alias": "@",
+  "rootPath": "src/",
+  "componentLib": "shadcn-ui",
+  "auth": null
+}
