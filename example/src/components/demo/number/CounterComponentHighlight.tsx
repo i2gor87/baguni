@@ -8,7 +8,11 @@ const CounterComponentHighlight = () => {
     '"use client";\nimport { APP_COUNTER } from "@/lib/variables";\nimport { useBaguni } from "baguni";\n\nconst CounterComponent = () => {\n  const [appCounter] = useBaguni(APP_COUNTER);\n  return (\n    <div>\n       <div> Counter: {appCounter}</div>\n    </div>\n  );\n};\n    \nexport default CounterComponent;';
   return (
     <Highlight
-      theme={theme === "dark" ? themes.duotoneDark : themes.github}
+      theme={
+        theme === "dark" || theme === undefined
+          ? themes.duotoneDark
+          : themes.github
+      }
       code={codeBlock}
       language="tsx"
     >
